@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myportfolio/code_icons.dart';
 import 'package:responsive_grid/responsive_grid.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Projects extends StatefulWidget {
   @override
@@ -28,16 +30,28 @@ class _ProjectsState extends State<Projects> {
             SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  Container(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: const EdgeInsets.all(32.0),
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.white,
-                        child: Icon(Icons.home,color: Colors.black,),
-                        onPressed:()=> Navigator.pop(context),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text("Projects",style:TextStyle(fontSize: 25.0,color: Colors.white,fontWeight: FontWeight.w800),),
+                            Text("UnderTaken",style:TextStyle(fontSize: 25.0,color: Colors.white,fontWeight: FontWeight.w100),),
+                          ],
+                        ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.all(32.0),
+                        child: FloatingActionButton(
+                          backgroundColor: Colors.white,
+                          child: Icon(Icons.home,color: Colors.black,),
+                          onPressed:()=> Navigator.pop(context),
+                        ),
+                      ),
+                    ],
                   ),
 
                   SingleChildScrollView(
@@ -54,33 +68,22 @@ class _ProjectsState extends State<Projects> {
                             ),
                             color:Colors.white,
                             child: Padding(
-                              padding: const EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.symmetric(horizontal:16.0,vertical: 20.0),
                               child: ListTile(
-                                title: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text("Projects",style:TextStyle(fontSize: 25.0,),),
-                                      Text("UnderTaken",style:TextStyle(fontSize: 25.0,),),
-                                    ],
-                                  ),
-                                ),
                                 subtitle: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text("The Following Projects have been build by me during my College period.Links to most of them have been provided and inconvinience for those whose link is not there."
-                                      "Kindly tap the heart if you love my project.",style:TextStyle(fontSize:18.0),),
+                                  padding: const EdgeInsets.symmetric(vertical:8.0),
+                                  child: Text("The Following Projects have been build by me during my College period.Links to most of them have been provided and inconvinience for those whose link is not there.",style:TextStyle(fontSize:18.0),),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        ResponsiveGridList(
+                          ResponsiveGridList(
                             scroll: false,
-                            desiredItemWidth: 370,
+                            desiredItemWidth: 300,
                             minSpacing: 10,
                             children: projects,
-                        )
+                          )
                       ],
                     ),
                   ),
@@ -97,23 +100,54 @@ class _ProjectsState extends State<Projects> {
 List<ProjectCard> projects=[
   ProjectCard(
       "Twigger",
-      "Flutter App for an Autonomous Vehicle currently initialised to deliver food items from canteen to office staff.",
+      "Flutter App for an Autonomous Vehicle currently initialized to deliver food items from canteen to office staff.",
       "https://github.com/shubhamj25/twigger",
-      "Flutter and Dart"
+      "Flutter and Dart",100,Icon(Icons.phone_android,color: Colors.black,)
   ),
   ProjectCard(
-      "Twigger",
-      "Flutter App for an Autonomous Vehicle currently initialised to deliver food items from canteen to office staff.",
-      "https://github.com/shubhamj25/twigger",
-      "Flutter and Dart"
+      "InstaView",
+      "Flutter Application to view ,comment,like and upload inspirational videos posted on the app by its users.",
+      "https://github.com/shubhamj25/instaview",
+      "Flutter and Dart",101,Icon(Icons.phone_android,color: Colors.black,)
   ),
   ProjectCard(
-      "Twigger",
-      "Flutter App for an Autonomous Vehicle currently initialised to deliver food items from canteen to office staff.",
-      "https://github.com/shubhamj25/twigger",
-      "Flutter and Dart"
-  )
+      "E- notice Board",
+      "Web Application to read and post University Notices.Developed using HTML5 and Bootstrap4 with php as backend to a SQL Database",
+      "https://eboard25.000webhostapp.com/eboard/examples/",
+      "HTML + CSS,AJAX & PHP",102,Icon(Code.code,color: Colors.black,)
+  ),
+  ProjectCard(
+      "BlockChain FabCar Application",
+      "Handles car ownership transactions using blockchain with NODEJS interface to invoke transactions and uses Hyperledger Explorer to have a view over all blocks appended to the blockchain.",
+      "https://github.com/shubhamj25/fabcar-app",
+      "Hyperledger Fabric",103,Icon(Code.bitcoin,color: Colors.black,)
+  ),
+  ProjectCard(
+      "MEAN Stack Web Application",
+      "This is a MEAN stack application using Node JS + Mongo DB as a service in Backend and Angular as Frontend.",
+      "http://postshubhu251298.herokuapp.com/",
+      "MEAN Stack",104,Icon(Code.database,color: Colors.black,)
+  ),
+  ProjectCard(
+      "Sample Railway Reservation Portal",
+      "A Sample Railway Reservation Web Application built using PHP as backend and HTML + CSS for Frontend.",
+      "https://railyatri1234.000webhostapp.com/",
+      "Web Development",105,Icon(Icons.web,color: Colors.black,)
+  ),
+  ProjectCard(
+      "Website for EDC@TIET",
+      "I worked for the Entrepreneurship Development Cell of my college and made a sample website for its representation. In this I used HTML + CSS for Frontend, PHP for backend and MYSQL for queries, Adobe Photoshop for Image Editing.",
+      "https://shubhamj25.github.io/profile2/examples/contents/edc.html",
+      "Web Development",106,Icon(Icons.web,color: Colors.black,)
+  ),
+  ProjectCard(
+      "Webkiosk Demo",
+      "Demo model of student management portal for a college/school.Since ,it's meant to work on a Single System thus below link shows the html page according to a User already logged in.",
+      "https://shubhamj25.github.io/profile2/examples/contents/html/WEBSITE.html",
+      "HTML & C++",107,Icon(Code.html5,color: Colors.black,)
+  ),
 ];
+
 /*
 class ProjectDetails{
   final String link,title,description,category;
@@ -129,9 +163,12 @@ class ProjectDetails{
  */
 
 
+
 class ProjectCard extends StatefulWidget {
   final String link,title,description,category;
-  ProjectCard(this.title,this.description,this.link,this.category);
+  final int herotag;
+  final Icon icon;
+  ProjectCard(this.title,this.description,this.link,this.category,this.herotag,this.icon);
   @override
   _ProjectCardState createState() => _ProjectCardState();
 }
@@ -139,54 +176,52 @@ class ProjectCard extends StatefulWidget {
 class _ProjectCardState extends State<ProjectCard> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        color: Colors.indigoAccent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        ),
-        elevation: 20.0,
-        child: Container(
-          width: 370.0,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical:8.0),
-            child: ListTile(
-              title: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("${widget.title}",style: TextStyle(color:Colors.white,fontSize: 18.0,fontWeight: FontWeight.w700),),
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.android,color: Colors.white,),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("${widget.category}",style: TextStyle(color:Colors.white,fontSize: 16.0,fontWeight: FontWeight.w500),),
-                      ),
-                    ],
+    return Card(
+      color: Colors.indigoAccent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      ),
+      elevation: 20.0,
+      child:Container(
+        width: 310.0,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical:8.0),
+          child: ListTile(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("${widget.title}",style: TextStyle(color:Colors.white,fontSize: 18.0,fontWeight: FontWeight.w700),),
                   ),
-                  Text("${widget.description}",style: TextStyle(color:Colors.white,fontSize: 16.0),),
-                  Padding(
-                    padding: const EdgeInsets.only(top:8.0),
-                    child: Card(elevation:6.0,child: Padding(
+                ),
+                FloatingActionButton(
+                  heroTag: widget.herotag,
+                  child: widget.icon,
+                  backgroundColor: Colors.white,
+                )
+              ],
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.extension,color: Colors.white,),
+                    Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Icon(Icons.link),
-                          ),
-                          Text("${widget.link}",style: TextStyle(fontSize: 14.0),),
-                        ],
-                      ),
-                    )),
-                  )
-                ],
-              ),
+                      child: Text("${widget.category}",style: TextStyle(color:Colors.white,fontSize: 16.0,fontWeight: FontWeight.w500),),
+                    ),
+                  ],
+                ),
+                Text("${widget.description}",style: TextStyle(color:Colors.white,fontSize: 16.0),),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical:8.0),
+                  child: FloatingActionButton.extended(heroTag:DateTime.now().millisecondsSinceEpoch,backgroundColor:Colors.white,icon:Icon(Icons.link,color: Colors.indigoAccent,),onPressed:()=>launch("${widget.link}"), label:Text("View Project",style: TextStyle(color: Colors.indigoAccent),)),
+                )
+              ],
             ),
           ),
         ),

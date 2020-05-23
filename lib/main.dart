@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:myportfolio/my_flutter_app_icons.dart';
@@ -5,7 +6,7 @@ import 'package:myportfolio/projects.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
-  runApp(MyApp());
+    runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -138,23 +139,34 @@ class _MyHomePageState extends State<MyHomePage> {
                       Container(
                         height: 500.0,
                         child: Swiper(
-                          itemCount: 2,
+                          itemCount: 3,
                           itemBuilder: (context,index){
                             if(index==0){
                               return  Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.symmetric(vertical:8.0),
                                 child: PhotoCard(),
+                              );
+                            }
+                            else if(index==1){
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(vertical:8.0),
+                                child: SkillCard(),
                               );
                             }
                             else{
                               return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SkillCard(),
+                                padding:  const EdgeInsets.symmetric(vertical:8.0),
+                                child: HobbieCard(),
                               );
                             }
                           },
                           pagination: SwiperPagination(),
-                          control: SwiperControl(),
+                          viewportFraction: 0.85,
+                          scale: 0.85,
+                          autoplay: true,
+                          autoplayDelay: 5000,
+                          curve: Curves.easeIn,
+                          autoplayDisableOnInteraction: true,
                         ),
                       ),
 
@@ -183,14 +195,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text("I started building web based projects during my Sophomore year using HTML & CSS and JavaScript as Frontend and PHP as backend."
-                                            "Recently I started working on Realtime Applications using Flutter and Dart Platform"
-                                            "powered by Firebase as backend.",style:TextStyle(fontSize: 18.0,fontWeight: FontWeight.w100,color: Colors.white)),
+                                            "Recently I started working on Flutter with Firebase as backend.",style:TextStyle(fontSize: 18.0,fontWeight: FontWeight.w100,color: Colors.white)),
                                       ),
 
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text("I also did my training in the field of Blockchain Technology under National Informatics Center, MietY GOI."
-                                            "During this training session I was introduced with the Hyperledger Platform using which I developed a Blockchain Powered Sample Nodejs Application.",style:TextStyle(fontSize: 18.0,color: Colors.white,fontWeight: FontWeight.w100)),
+                                            "\nDuring this training session I was introduced with the Hyperledger Platform using which I developed a Blockchain Powered Sample Nodejs Application.",style:TextStyle(fontSize: 18.0,color: Colors.white,fontWeight: FontWeight.w100)),
                                       )
 
                                     ],
@@ -252,7 +263,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 padding: const EdgeInsets.all(8.0),
                                                 child: Icon(Icons.location_city),
                                               ),
-                                              Text("Schooling (2014-2015)",style: TextStyle(fontSize:18.0,fontWeight: FontWeight.w700),),
+                                              Expanded(child: Text("Schooling (2014-2015)",style: TextStyle(fontSize:18.0,fontWeight: FontWeight.w700),)),
                                             ],
                                           ),
                                           subtitle: Row(
@@ -270,9 +281,29 @@ class _MyHomePageState extends State<MyHomePage> {
                                             children: <Widget>[
                                               Padding(
                                                 padding: const EdgeInsets.all(8.0),
+                                                child: Icon(Icons.account_balance),
+                                              ),
+                                              Expanded(child: Text("Higher Secondary (2016-2017)",style: TextStyle(fontSize:18.0,fontWeight: FontWeight.w700),)),
+                                            ],
+                                          ),
+                                          subtitle: Row(
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Icon(Icons.star,color: Colors.grey,),
+                                              ),
+                                              Expanded(child: Text("Completed 12th from Ahlcon Public School, Delhi under CBSE Board securing 95% in main subjects.",style: TextStyle(fontSize:18.0),)),
+                                            ],
+                                          ),
+                                        ),
+                                        ListTile(
+                                          title: Row(
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.all(8.0),
                                                 child: Icon(Icons.school),
                                               ),
-                                              Text("College (2017-2018)",style: TextStyle(fontSize:18.0,fontWeight: FontWeight.w700),),
+                                              Expanded(child: Text("College (2017-2018)",style: TextStyle(fontSize:18.0,fontWeight: FontWeight.w700),)),
                                             ],
                                           ),
                                           subtitle: Column(
@@ -315,7 +346,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 padding: const EdgeInsets.all(8.0),
                                                 child: Icon(Icons.timeline),
                                               ),
-                                              Text("Current (2019-present)",style: TextStyle(fontSize:18.0,fontWeight: FontWeight.w700),),
+                                              Expanded(child: Text("Current (2019-present)",style: TextStyle(fontSize:18.0,fontWeight: FontWeight.w700),)),
                                             ],
                                           ),
                                           subtitle: Column(
@@ -381,7 +412,7 @@ class _PhotoCardState extends State<PhotoCard> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            width: MediaQuery.of(context).size.width*0.8,
+            width: MediaQuery.of(context).size.width*0.85,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -401,7 +432,7 @@ class _PhotoCardState extends State<PhotoCard> {
                         Row(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.only(top:8.0,right:8.0,bottom:8.0),
                               child: Icon(Icons.email),
                             ),
                             Expanded(child: Text("sjain251298@gmail.com",style: TextStyle(fontSize: 16.0))),
@@ -410,7 +441,7 @@ class _PhotoCardState extends State<PhotoCard> {
                         Row(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  const EdgeInsets.only(top:8.0,right:8.0,bottom:8.0),
                               child: Icon(Icons.phone_android),
                             ),
                             Expanded(child: Text("+918558859060",style: TextStyle(fontSize: 16.0))),
@@ -419,7 +450,7 @@ class _PhotoCardState extends State<PhotoCard> {
                         Row(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  const EdgeInsets.only(top:8.0,right:8.0,bottom:8.0),
                               child: Icon(Icons.link),
                             ),
                             Expanded(child: Text("https://github.com/shubhamj25",style: TextStyle(fontSize: 16.0),)),
@@ -428,7 +459,7 @@ class _PhotoCardState extends State<PhotoCard> {
                         Row(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  const EdgeInsets.only(top:8.0,right:8.0,bottom:8.0),
                               child: Icon(Icons.my_location),
                             ),
                             Expanded(child: Text("Vasundhara Enclave Delhi - 110096",style: TextStyle(fontSize: 16.0))),
@@ -477,26 +508,28 @@ class _SkillCardState extends State<SkillCard> {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   height: 300.0,
-                  width: MediaQuery.of(context).size.width*0.8,
+                  width: MediaQuery.of(context).size.width*0.85,
                   child: GridView(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 18.0/8.0,
+                      childAspectRatio: 20.0/10.0,
                       crossAxisCount: 2
                     ),
                     children: <Widget>[
-                      Skill("Flutter and Dart", "Intermediate"),
+                      Skill("Flutter", "Intermediate"),
+                      Skill("Dart", "Intermediate"),
                       Skill("FireBase", "Intermediate"),
                       Skill("Blockchain", "Beginner"),
                       Skill("C/C++", "Intermediate"),
-                      Skill("Web Design", "Intermediate"),
+                      Skill("Web Dev", "Intermediate"),
                       Skill("HTML + CSS", "Intermediate"),
+                      Skill("Javascript", "Intermediate"),
                       Skill("BootStrap", "Intermediate"),
-                      Skill("Database Management", "Expert"),
-                      Skill("MYSQL & PLSQL", "Intermediate"),
+                      Skill("DBMS", "Expert"),
+                      Skill("SQL/PLSQL", "Intermediate"),
                       Skill("PHP", "Intermediate"),
-                      Skill("PHP", "Intermediate"),
+                      Skill("Dart", "Intermediate"),
                       Skill("Arduino", "Intermediate"),
                     ],
                   )
@@ -511,7 +544,7 @@ class _SkillCardState extends State<SkillCard> {
 }
 
 class Skill extends StatefulWidget {
-  String name,level;
+  final String name,level;
   Skill(this.name,this.level);
   @override
   _SkillState createState() => _SkillState();
@@ -523,8 +556,87 @@ class _SkillState extends State<Skill> {
     return Material(
       elevation: 8.0,
       child: ListTile(
+        title: Text("${widget.name}",style: TextStyle(fontSize: 16.0),),
+        subtitle:Text("${widget.level}",style: TextStyle(fontSize: 14.0),) ,
+      ),
+    );
+  }
+}
+
+
+
+class HobbieCard extends StatefulWidget {
+  @override
+  _HobbieCardState createState() => _HobbieCardState();
+}
+
+class _HobbieCardState extends State<HobbieCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      child: Material(
+        elevation: 20.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text("Hobbies",style: TextStyle(fontSize: 22.0),),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                    height: 300.0,
+                    width: MediaQuery.of(context).size.width*0.8,
+                    child: ListView(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Hobbie("Coding MindSet", "I am an enthusiastic programmer and have keen interest in learning new skills.", Icon(Icons.laptop_mac,size: 25.0,)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Hobbie("Sport Activities", "Badminton, BasketBall and Table Tennis are some of the sports which I like to play in my leisure time.", Icon(Icons.fitness_center,size: 25.0,)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Hobbie("Music and Travel","I love listening pop music and exploring new destinations", Icon(Icons.headset,size: 25.0,)),
+                        ),
+                      ],
+                    )
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Hobbie extends StatefulWidget {
+  final String name,desc;
+  final Icon icon;
+  Hobbie(this.name,this.desc,this.icon);
+  @override
+  _HobbieState createState() => _HobbieState();
+}
+
+class _HobbieState extends State<Hobbie> {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: ListTile(
+        leading: widget.icon,
         title: Text("${widget.name}",style: TextStyle(fontSize: 18.0),),
-        subtitle:Text("${widget.level}",style: TextStyle(fontSize: 16.0),) ,
+        subtitle:Text("${widget.desc}",style: TextStyle(fontSize: 16.0),) ,
       ),
     );
   }

@@ -31,6 +31,7 @@ dependencies:
   url_launcher:
   flutter_swiper:
   responsive_grid:
+  cached_network_image:
 
 dev_dependencies:
   flutter_test:
@@ -86,5 +87,8 @@ flutter:
       fonts:
         - asset: fonts/MyFlutterApp.ttf
 
+    - family:  Code
+      fonts:
+        - asset: fonts/Code.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
