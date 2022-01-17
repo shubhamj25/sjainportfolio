@@ -1,7 +1,6 @@
 {
   "hosting": {
-    "site": "sjain2512",
-    "public": "public",
+    "public": "build/web",
     "ignore": [
       "firebase.json",
       "**/.*",
