@@ -27,10 +27,10 @@ class _MyDrawerState extends State<MyDrawer> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.account_circle,
-                  size: 120.0,
+                padding: const EdgeInsets.symmetric(horizontal:16.0,vertical:24),
+                child: CircleAvatar(
+                  backgroundImage: AssetImage(_userBloc.state.user.avatarUrl),
+                  radius: 60.0,
                 ),
               ),
               ListTile(
