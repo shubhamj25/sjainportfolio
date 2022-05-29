@@ -1,26 +1,27 @@
 import 'package:myportfolio/models/project.dart';
 
 class User {
-  User(
-      {this.name,
-      this.avatarUrl,
-      this.drawerDesc,
-      this.coverUrl,
-      this.projectCoverUrl,
-      this.bio,
-      this.email,
-      this.mobile,
-      this.address,
-      this.gitUrl,
-      this.skills,
-      this.schooling,
-      this.highSchool,
-      this.college,
-      this.career,
-      this.projects,
-      this.linkedInUrl,
-        this.fbUrl,
-      });
+  User({
+    this.name,
+    this.avatarUrl,
+    this.drawerDesc,
+    this.coverUrl,
+    this.projectCoverUrl,
+    this.bio,
+    this.email,
+    this.mapLink,
+    this.mobile,
+    this.address,
+    this.gitUsername,
+    this.skills,
+    this.schooling,
+    this.highSchool,
+    this.college,
+    this.career,
+    this.projects,
+    this.linkedInUrl,
+    this.fbUrl,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) {
     List<Skills> skillSet = [];
@@ -48,24 +49,25 @@ class User {
       });
     }
     User user = User(
-        name: json['name'],
-        avatarUrl: json['avatar_url'],
-        drawerDesc: json['drawer_desc'],
-        bio: json['bio'],
-        email: json['email'],
-        mobile: json['mobile'],
-        address: json['address'],
-        gitUrl: json['git_url'],
-        fbUrl: json['fb_url'],
-        linkedInUrl: json['linkedin_url'],
-        coverUrl: json['cover_url'],
-        projectCoverUrl: json['project_cover_url'],
-        skills: skillSet,
-        schooling: json['schooling'],
-        highSchool: json['highSchool'],
-        college: collegeStats,
-        career: careerStats,
-        projects: projects,
+      name: json['name'],
+      avatarUrl: json['avatar_url'],
+      drawerDesc: json['drawer_desc'],
+      bio: json['bio'],
+      email: json['email'],
+      mapLink: json['map_link'],
+      mobile: json['mobile'],
+      address: json['address'],
+      gitUsername: json['git_username'],
+      fbUrl: json['fb_url'],
+      linkedInUrl: json['linkedin_url'],
+      coverUrl: json['cover_url'],
+      projectCoverUrl: json['project_cover_url'],
+      skills: skillSet,
+      schooling: json['schooling'],
+      highSchool: json['highSchool'],
+      college: collegeStats,
+      career: careerStats,
+      projects: projects,
     );
     return user;
   }
@@ -75,9 +77,10 @@ class User {
   String drawerDesc;
   String bio;
   String email;
+  String mapLink;
   String mobile;
   String address;
-  String gitUrl;
+  String gitUsername;
   String linkedInUrl;
   String fbUrl;
   String coverUrl;
@@ -96,15 +99,16 @@ class User {
     map['drawer_desc'] = drawerDesc;
     map['bio'] = bio;
     map['email'] = email;
+    map['map_link'] = mapLink;
     map['mobile'] = mobile;
     map['address'] = address;
-    map['git_url'] = gitUrl;
+    map['git_username'] = gitUsername;
     map['cover_url'] = coverUrl;
     map['project_cover_url'] = projectCoverUrl;
     map['schooling'] = schooling;
     map['highSchooling'] = highSchool;
     map['linkedin_url'] = linkedInUrl;
-    map['fb_url'] =  fbUrl;
+    map['fb_url'] = fbUrl;
     if (skills != null) {
       map['skills'] = skills?.map((v) => v.toJson())?.toList();
     }

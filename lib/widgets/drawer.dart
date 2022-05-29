@@ -29,7 +29,7 @@ class _MyDrawerState extends State<MyDrawer> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal:16.0,vertical:24),
                 child: CircleAvatar(
-                  backgroundImage: AssetImage(_userBloc.state.user.avatarUrl),
+                  backgroundImage: NetworkImage(_userBloc.state.user.avatarUrl),
                   radius: 60.0,
                 ),
               ),

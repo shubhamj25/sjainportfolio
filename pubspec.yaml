@@ -56,15 +56,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  assets:
-    - images/scenery.png
-    - images/scenery2.jpg
-    - images/firewatch.png
-    - images/shubhu.jpeg
-    - images/Avatar.png
-    - images/shubhu3.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

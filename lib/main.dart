@@ -74,21 +74,25 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _textRow(String text) {
-    return Row(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Icon(
-            Icons.star,
-            color: Colors.grey,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Icon(
+              Icons.star,
+              color: Colors.grey,
+            ),
           ),
-        ),
-        Expanded(
-            child: Text(
-          text,
-          style: TextStyle(fontSize: 18.0),
-        )),
-      ],
+          Expanded(
+              child: Text(
+            text,
+            style: TextStyle(fontSize: 18.0),
+          )),
+        ],
+      ),
     );
   }
 
@@ -121,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     MyFlutterApp.github,
                     color: Colors.indigo,
                   ),
-                  onPressed: () => launch(user.gitUrl),
+                  onPressed: () => launch("https://github.com/"+user.gitUsername),
                 ),
               ),
               Padding(
@@ -348,7 +352,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                      image: AssetImage(_userbloc.state.user.coverUrl),
+                      image: NetworkImage(_userbloc.state.user.coverUrl),
                       fit: BoxFit.cover,
                     )),
                   ),
@@ -449,7 +453,7 @@ class _PhotoCardState extends State<PhotoCard> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CircleAvatar(
-                      backgroundImage: AssetImage(widget.user.avatarUrl),
+                      backgroundImage: NetworkImage(widget.user.avatarUrl),
                       radius: 80.0,
                     ),
                   ),
@@ -458,55 +462,72 @@ class _PhotoCardState extends State<PhotoCard> {
                         Text("Shubham Jain", style: TextStyle(fontSize: 18.0)),
                     subtitle: Column(
                       children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 8.0, right: 8.0, bottom: 8.0),
-                              child: Icon(Icons.email),
-                            ),
-                            Expanded(
-                                child: Text(widget.user.email,
-                                    style: TextStyle(fontSize: 16.0))),
-                          ],
+                        InkWell(
+                          hoverColor: Colors.transparent,
+                          onTap:()=>
+                            launch(Uri(scheme: 'mailto',path: widget.user.email).toString()),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 8.0, right: 8.0, bottom: 8.0),
+                                child: Icon(Icons.email,color: Colors.blueAccent),
+                              ),
+                              Expanded(
+                                  child: Text(widget.user.email,
+                                      style: TextStyle(fontSize: 16.0))),
+                            ],
+                          ),
                         ),
-                        Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 8.0, right: 8.0, bottom: 8.0),
-                              child: Icon(Icons.phone_android),
-                            ),
-                            Expanded(
-                                child: Text(widget.user.mobile,
-                                    style: TextStyle(fontSize: 16.0))),
-                          ],
+                        InkWell(
+                          hoverColor: Colors.transparent,
+                          onTap: ()=>launch(Uri(scheme: 'tel',path: widget.user.mobile).toString()),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 8.0, right: 8.0, bottom: 8.0),
+                                child: Icon(Icons.phone_android,color: Colors.blueAccent,),
+                              ),
+                              Expanded(
+                                  child: Text(widget.user.mobile,
+                                      style: TextStyle(fontSize: 16.0))),
+                            ],
+                          ),
                         ),
-                        Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 8.0, right: 8.0, bottom: 8.0),
-                              child: Icon(Icons.link),
-                            ),
-                            Expanded(
-                                child: Text(
-                              widget.user.gitUrl,
-                              style: TextStyle(fontSize: 16.0),
-                            )),
-                          ],
+                        InkWell(
+                          hoverColor: Colors.transparent,
+                          onTap: ()=>launch("https://github.com/"+widget.user.gitUsername),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 8.0, right: 8.0, bottom: 8.0),
+                                child: Icon(MyFlutterApp.github_circled_alt2,color: Colors.blueAccent,),
+                              ),
+                              Expanded(
+                                  child: Text(
+                                widget.user.gitUsername,
+                                style: TextStyle(fontSize: 16.0),
+                              )),
+                            ],
+                          ),
                         ),
-                        Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 8.0, right: 8.0, bottom: 8.0),
-                              child: Icon(Icons.my_location),
-                            ),
-                            Expanded(
-                                child: Text(widget.user.address,
-                                    style: TextStyle(fontSize: 16.0))),
-                          ],
+                        InkWell(
+                          hoverColor: Colors.transparent,
+                          onTap: ()=>launch(widget.user.mapLink),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 8.0, right: 8.0, bottom: 8.0),
+                                child: Icon(Icons.my_location,color: Colors.blueAccent,),
+                              ),
+                              Expanded(
+                                  child: Text(widget.user.address,
+                                      style: TextStyle(fontSize: 16.0))),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -559,8 +580,9 @@ class _SkillCardState extends State<SkillCard> {
                     child: GridView(
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: 20.0 / 10.0, crossAxisCount: 2),
+                        gridDelegate: MediaQuery.of(context).size.width < 750 ? SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: 20.0 / 10.0, crossAxisCount: 2):SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: 20.0 / 8.0, crossAxisCount: 3),
                         children: widget.skills
                             .map((skill) => Skill(skill.title, skill.level))
                             .toList())),
