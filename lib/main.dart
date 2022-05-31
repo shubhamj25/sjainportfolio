@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -170,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
             elevation: 20.0,
             color: Colors.black87,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.elliptical(5.0, 30.0)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -355,7 +356,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                      image: NetworkImage(_userbloc.state.user.coverUrl),
+                      image: CachedNetworkImageProvider(_userbloc.state.user.coverUrl),
                       fit: BoxFit.cover,
                     )),
                   ),
@@ -456,7 +457,9 @@ class _PhotoCardState extends State<PhotoCard> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CircleAvatar(
-                      backgroundImage: NetworkImage(widget.user.avatarUrl),
+                      backgroundImage: CachedNetworkImageProvider(
+                        widget.user.avatarUrl
+                      ),
                       radius: 80.0,
                     ),
                   ),

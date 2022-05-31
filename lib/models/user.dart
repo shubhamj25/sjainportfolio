@@ -20,6 +20,7 @@ class User {
       this.career,
       this.projects,
       this.linkedInUrl,
+        this.currentCompanyLogo,
       this.fbUrl,
       this.resumeLink});
 
@@ -66,6 +67,7 @@ class User {
       schooling: json['schooling'],
       highSchool: json['highSchool'],
       resumeLink: json['resume_link'],
+      currentCompanyLogo: json['current_company_logo'],
       college: collegeStats,
       career: careerStats,
       projects: projects,
@@ -89,6 +91,7 @@ class User {
   String schooling;
   String highSchool;
   String resumeLink;
+  String currentCompanyLogo;
   List<String> college;
   List<String> career;
   List<Skills> skills;
@@ -112,6 +115,7 @@ class User {
     map['linkedin_url'] = linkedInUrl;
     map['fb_url'] = fbUrl;
     map['resume_link'] = resumeLink;
+    map['current_company_logo']=currentCompanyLogo;
     if (skills != null) {
       map['skills'] = skills?.map((v) => v.toJson())?.toList();
     }

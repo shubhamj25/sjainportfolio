@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:html' as html;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -41,268 +42,276 @@ class _MyDrawerState extends State<MyDrawer> {
   Widget build(BuildContext context) {
     return _userBloc.state.user != null
         ? Scaffold(
-            resizeToAvoidBottomInset: true,
             body: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 24),
-                        child: CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(_userBloc.state.user.avatarUrl),
-                          radius: 60.0,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 24),
+                          child: CircleAvatar(
+                            backgroundImage:
+                                CachedNetworkImageProvider(_userBloc.state.user.avatarUrl),
+                            radius: 60.0,
+                          ),
                         ),
-                      ),
-                      ListTile(
-                        title: Text(
-                          "Shubham Jain",
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        subtitle: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        Padding(
+                          padding: const EdgeInsets.only(left:24.0),
                           child: Text(
-                            _userBloc.state.user.drawerDesc,
-                            style: TextStyle(fontSize: 18.0),
+                            "Shubham Jain",
+                            style: TextStyle(fontSize: 20.0),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 50.0),
-                        child: ListTile(
-                          leading: Icon(Icons.library_books),
-                          title: Text(
-                            "Work Samples",
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w100,
-                                color: Color.fromARGB(255, 50, 50, 60)),
-                          ),
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return BlocProvider(
-                                create: (context) => UserBloc()
-                                  ..add(FetchProfile(
-                                      userId: "sjain251298@gmail.com")),
-                                child: Projects(user: _userBloc.state.user),
-                              );
-                            }));
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    child: Column(
-                      children: [
                         ListTile(
-                          leading: Icon(
-                            Icons.attach_file_rounded,
-                            color: Colors.white,
-                          ),
-                          title: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(vertical: 8.0),
+                          leading: Image(image:CachedNetworkImageProvider(_userBloc.state.user.currentCompanyLogo)),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: Text(
-                              "Download Resume",
+                              _userBloc.state.user.drawerDesc,
+                              style: TextStyle(fontSize: 18.0),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 50.0),
+                          child: ListTile(
+                            leading: Icon(Icons.library_books),
+                            title: Text(
+                              "Work Samples",
                               style: TextStyle(
                                   fontSize: 18.0,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
+                                  fontWeight: FontWeight.w100,
+                                  color: Color.fromARGB(255, 50, 50, 60)),
                             ),
-                          ),
-                          subtitle: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Please provide your name and email to ensure better engagement.",
-                                  style: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w100,
-                                      color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Form(
-                          key: _formKey,
-                          autovalidateMode:
-                              AutovalidateMode.onUserInteraction,
-                          child: Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Column(
-                              children: [
-                                Material(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8))),
-                                  color: Colors.white,
-                                  child: TextFormField(
-                                    focusNode: _focusNodeName,
-                                    onTap: () =>
-                                        _focusNodeName.requestFocus(),
-                                    controller: _nameController,
-                                    enableInteractiveSelection: true,
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 16.0),
-                                    validator: (String value) {
-                                      if (value == null || value == '') {
-                                        return "Please enter your name";
-                                      }
-                                      return null;
-                                    },
-                                    onSaved: (String name) {
-                                      setState(() {
-                                        _name = name;
-                                      });
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: "Name",
-                                      hintStyle: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 16.0),
-                                      fillColor: Colors.white,
-                                      contentPadding: EdgeInsets.only(
-                                          top: 14.0, left: 24, bottom: 14),
-                                      prefixIcon: Icon(Icons.account_circle,
-                                          color: Colors.black54),
-                                      errorStyle: GoogleFonts.balooBhaina(
-                                          fontSize: 14),
-                                      border: InputBorder.none,
-                                    ),
-                                  ),
-                                ),
-                                Material(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8))),
-                                  color: Colors.white,
-                                  child: Stack(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(right: 24.0),
-                                        child: TextFormField(
-                                          focusNode: _focusNode,
-                                          controller: _emailController,
-                                          enableInteractiveSelection: true,
-                                          style: TextStyle(
-                                              color: Colors.black, fontSize: 16.0),
-                                          onChanged: (value) {
-                                            setState(() {
-                                              _emailError = false;
-                                            });
-                                          },
-                                          validator: (String value) {
-                                            if (value == null || value == "") {
-                                              return "Please enter an email";
-                                            } else if (!regex.hasMatch(value) ||
-                                                _emailError) {
-                                              return "Invalid email";
-                                            }
-                                            return null;
-                                          },
-                                          onSaved: (String email) {
-                                            setState(() {
-                                              _email = email;
-                                            });
-                                          },
-                                          decoration: InputDecoration(
-                                            hintText: "Email",
-                                            hintStyle: TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 16.0),
-                                            fillColor: Colors.white,
-                                            contentPadding: EdgeInsets.only(
-                                                top: 14.0, left: 24, bottom: 14),
-                                            prefixIcon: Icon(Icons.alternate_email,
-                                                color: Colors.black54),
-                                            errorStyle: GoogleFonts.balooBhaina(
-                                                fontSize: 14),
-                                            border: InputBorder.none,
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 4,
-                                        right: 0,
-                                        child: _isVerifyingEmail
-                                          ? Transform.scale(
-                                        scale: 0.5,
-                                        child:
-                                        Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: CircularProgressIndicator(
-                                            strokeWidth: 8,
-                                          ),
-                                        ),
-                                      )
-                                          : IconButton(
-                                        icon: Icon(
-                                          Icons.download,
-                                          size:24,
-                                          color: Colors.blue,
-                                        ),
-                                        onPressed: () async {
-                                          setState(() {
-                                            _isVerifyingEmail = true;
-                                          });
-                                          _formKey.currentState.save();
-                                          await verifyEmail(_email)
-                                              .then((res) {
-                                            setState(() {
-                                              _emailError =
-                                              !res ? true : false;
-                                              _isVerifyingEmail = false;
-                                            });
-                                          });
-                                          if (_formKey.currentState
-                                              .validate()) {
-                                            _userBloc
-                                              ..add(LogEngagingUser(
-                                                  name: _name,
-                                                  email: _email));
-                                            _emailController.clear();
-                                            _nameController.clear();
-                                            if(MediaQuery.of(context).size.width<750){
-                                              downloadFile(
-                                                  _userBloc.state.user
-                                                      .resumeLink);
-                                            }
-                                            else{
-                                              html.window.open(_userBloc.state.user
-                                                  .resumeLink,'_blank');
-                                            }
-                                            Navigator.pop(context);
-                                          }
-                                        },
-                                      ),)
-
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return BlocProvider(
+                                  create: (context) => UserBloc()
+                                    ..add(FetchProfile(
+                                        userId: "sjain251298@gmail.com")),
+                                  child: Projects(user: _userBloc.state.user),
+                                );
+                              }));
+                            },
                           ),
                         ),
                       ],
                     ),
-                  )
-                ],
+                    Container(
+                      margin: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.blueAccent,
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                      ),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: Icon(
+                              Icons.attach_file_rounded,
+                              color: Colors.white,
+                            ),
+                            title: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                "Download Resume",
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white),
+                              ),
+                            ),
+                            subtitle: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Please provide your name and email to ensure better engagement.",
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w100,
+                                        color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Form(
+                            key: _formKey,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            child: Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: Column(
+                                children: [
+                                  Material(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(8),
+                                            topRight: Radius.circular(8))),
+                                    color: Colors.white,
+                                    child: TextFormField(
+                                      focusNode: _focusNodeName,
+                                      onTap: () =>
+                                          _focusNodeName.requestFocus(),
+                                      controller: _nameController,
+                                      enableInteractiveSelection: true,
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 16.0),
+                                      validator: (String value) {
+                                        if (value == null || value == '') {
+                                          return "Please enter your name";
+                                        }
+                                        return null;
+                                      },
+                                      onSaved: (String name) {
+                                        setState(() {
+                                          _name = name;
+                                        });
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Name",
+                                        hintStyle: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 16.0),
+                                        fillColor: Colors.white,
+                                        contentPadding: EdgeInsets.only(
+                                            top: 14.0, left: 24, bottom: 14),
+                                        prefixIcon: Icon(Icons.account_circle,
+                                            color: Colors.black54),
+                                        errorStyle: GoogleFonts.balooBhaina(
+                                            fontSize: 14),
+                                        border: InputBorder.none,
+                                      ),
+                                    ),
+                                  ),
+                                  Material(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(8),
+                                            bottomRight: Radius.circular(8))),
+                                    color: Colors.white,
+                                    child: Stack(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(right: 24.0),
+                                          child: TextFormField(
+                                            focusNode: _focusNode,
+                                            controller: _emailController,
+                                            enableInteractiveSelection: true,
+                                            style: TextStyle(
+                                                color: Colors.black, fontSize: 16.0),
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _emailError = false;
+                                              });
+                                            },
+                                            validator: (String value) {
+                                              if (value == null || value == "") {
+                                                return "Please enter an email";
+                                              } else if (!regex.hasMatch(value) ||
+                                                  _emailError) {
+                                                return "Invalid email";
+                                              }
+                                              return null;
+                                            },
+                                            onSaved: (String email) {
+                                              setState(() {
+                                                _email = email;
+                                              });
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Email",
+                                              hintStyle: TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 16.0),
+                                              fillColor: Colors.white,
+                                              contentPadding: EdgeInsets.only(
+                                                  top: 14.0, left: 24, bottom: 14),
+                                              prefixIcon: Icon(Icons.alternate_email,
+                                                  color: Colors.black54),
+                                              errorStyle: GoogleFonts.balooBhaina(
+                                                  fontSize: 14),
+                                              border: InputBorder.none,
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 4,
+                                          right: 0,
+                                          child: _isVerifyingEmail
+                                            ? Transform.scale(
+                                          scale: 0.5,
+                                          child:
+                                          Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 8,
+                                            ),
+                                          ),
+                                        )
+                                            : IconButton(
+                                          icon: Icon(
+                                            Icons.download,
+                                            size:24,
+                                            color: Colors.blue,
+                                          ),
+                                          onPressed: () async {
+                                            setState(() {
+                                              _isVerifyingEmail = true;
+                                            });
+                                            _formKey.currentState.save();
+                                            await verifyEmail(_email)
+                                                .then((res) {
+                                              setState(() {
+                                                _emailError =
+                                                !res ? true : false;
+                                                _isVerifyingEmail = false;
+                                              });
+                                            });
+                                            if (_formKey.currentState
+                                                .validate()) {
+                                              _userBloc
+                                                ..add(LogEngagingUser(
+                                                    name: _name,
+                                                    email: _email));
+                                              _emailController.clear();
+                                              _nameController.clear();
+                                              if(MediaQuery.of(context).size.width<750){
+                                                downloadFile(
+                                                    _userBloc.state.user
+                                                        .resumeLink);
+                                              }
+                                              else{
+                                                html.window.open(_userBloc.state.user
+                                                    .resumeLink,'_blank');
+                                              }
+                                              Navigator.pop(context);
+                                            }
+                                          },
+                                        ),)
+
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           )
