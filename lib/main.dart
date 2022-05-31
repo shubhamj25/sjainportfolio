@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:myportfolio/models/user.dart';
 import 'package:myportfolio/my_flutter_app_icons.dart';
@@ -14,13 +15,14 @@ import 'bloc/user_bloc.dart';
 Future<void> main() async {
   ErrorWidget.builder = (FlutterErrorDetails details) => Container();
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: '.env');
   await Firebase.initializeApp(
     options: FirebaseOptions(
-        messagingSenderId: "211063386402",
-        appId: "1:211063386402:web:655e2cd76e95a3f714357b",
-        apiKey: "AIzaSyAMcapBSKjiSxJeovFQriIcS8FhuPD39vc",
-        databaseURL: "https://portfolio-5e04b.firebaseio.com",
-        projectId: "portfolio-5e04b"),
+        messagingSenderId: dotenv.env['messagingSenderId'],
+        appId: dotenv.env['appId'],
+        apiKey:dotenv.env['apiKey'],
+        databaseURL: dotenv.env['databaseURL'],
+        projectId: dotenv.env['projectId']),
   );
   runApp(
     RepositoryProvider(
@@ -336,6 +338,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return SafeArea(
       child: Scaffold(
         key: _scaffold,
+        resizeToAvoidBottomInset: true,
         drawer: Drawer(child: MyDrawer()),
         body: BlocBuilder<UserBloc, UserState>(
           builder: (context, state) {

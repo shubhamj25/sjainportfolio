@@ -11,9 +11,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(UserState()) {
     final UserRepository repo = UserRepository();
     on<UserEvent>((event, emit) async {
-      if(event is FetchProfile) {
+      if (event is FetchProfile) {
         var response = await repo.getUserData(event.userId);
-        emit(UserState(user: User.fromJson(response), status: UserStateStatus.success));
+        emit(UserState(
+            user: User.fromJson(response), status: UserStateStatus.success));
+      } else if (event is LogEngagingUser) {
+        repo.logEngagingUser(event.name, event.email);
       }
     });
   }

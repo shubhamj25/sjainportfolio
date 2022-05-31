@@ -1,27 +1,27 @@
 import 'package:myportfolio/models/project.dart';
 
 class User {
-  User({
-    this.name,
-    this.avatarUrl,
-    this.drawerDesc,
-    this.coverUrl,
-    this.projectCoverUrl,
-    this.bio,
-    this.email,
-    this.mapLink,
-    this.mobile,
-    this.address,
-    this.gitUsername,
-    this.skills,
-    this.schooling,
-    this.highSchool,
-    this.college,
-    this.career,
-    this.projects,
-    this.linkedInUrl,
-    this.fbUrl,
-  });
+  User(
+      {this.name,
+      this.avatarUrl,
+      this.drawerDesc,
+      this.coverUrl,
+      this.projectCoverUrl,
+      this.bio,
+      this.email,
+      this.mapLink,
+      this.mobile,
+      this.address,
+      this.gitUsername,
+      this.skills,
+      this.schooling,
+      this.highSchool,
+      this.college,
+      this.career,
+      this.projects,
+      this.linkedInUrl,
+      this.fbUrl,
+      this.resumeLink});
 
   factory User.fromJson(Map<String, dynamic> json) {
     List<Skills> skillSet = [];
@@ -65,6 +65,7 @@ class User {
       skills: skillSet,
       schooling: json['schooling'],
       highSchool: json['highSchool'],
+      resumeLink: json['resume_link'],
       college: collegeStats,
       career: careerStats,
       projects: projects,
@@ -87,6 +88,7 @@ class User {
   String projectCoverUrl;
   String schooling;
   String highSchool;
+  String resumeLink;
   List<String> college;
   List<String> career;
   List<Skills> skills;
@@ -109,6 +111,7 @@ class User {
     map['highSchooling'] = highSchool;
     map['linkedin_url'] = linkedInUrl;
     map['fb_url'] = fbUrl;
+    map['resume_link'] = resumeLink;
     if (skills != null) {
       map['skills'] = skills?.map((v) => v.toJson())?.toList();
     }
