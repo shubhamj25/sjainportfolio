@@ -1,3 +1,4 @@
+import 'package:myportfolio/models/certification.dart';
 import 'package:myportfolio/models/project.dart';
 
 class User {
@@ -20,15 +21,19 @@ class User {
       this.career,
       this.projects,
       this.linkedInUrl,
-        this.currentCompanyLogo,
+      this.currentCompanyLogo,
       this.fbUrl,
-      this.resumeLink});
+      this.resumeLink,
+      this.certifications
+      });
 
   factory User.fromJson(Map<String, dynamic> json) {
     List<Skills> skillSet = [];
     List<String> collegeStats = [];
     List<String> careerStats = [];
     List<Project> projects = [];
+    List<Certification> certificates = [];
+
     if (json['skills'] != null) {
       json['skills'].forEach((v) {
         skillSet.add(Skills.fromJson(v));
@@ -47,6 +52,11 @@ class User {
     if (json['projects'] != null) {
       json['projects'].forEach((v) {
         projects.add(Project.fromJson(v));
+      });
+    }
+    if (json['certifications'] != null) {
+      json['certifications'].forEach((v) {
+        certificates.add(Certification.fromJson(v));
       });
     }
     User user = User(
@@ -71,6 +81,7 @@ class User {
       college: collegeStats,
       career: careerStats,
       projects: projects,
+      certifications: certificates
     );
     return user;
   }
@@ -96,6 +107,7 @@ class User {
   List<String> career;
   List<Skills> skills;
   List<Project> projects;
+  List<Certification> certifications;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -115,7 +127,7 @@ class User {
     map['linkedin_url'] = linkedInUrl;
     map['fb_url'] = fbUrl;
     map['resume_link'] = resumeLink;
-    map['current_company_logo']=currentCompanyLogo;
+    map['current_company_logo'] = currentCompanyLogo;
     if (skills != null) {
       map['skills'] = skills?.map((v) => v.toJson())?.toList();
     }
@@ -128,27 +140,30 @@ class User {
     if (projects != null) {
       map['projects'] = projects.map((v) => v.toJson()).toList();
     }
+    if (certifications != null) {
+      map['certifications'] = certifications.map((v) => v.toJson()).toList();
+    }
     return map;
   }
 }
 
 class Skills {
-  Skills({
-    this.title,
-    this.level,
-  });
+  Skills({this.title, this.level, this.logo});
 
   factory Skills.fromJson(Map<String, dynamic> json) {
-    return Skills(title: json['title'], level: json['level']);
+    return Skills(
+        title: json['title'], level: json['level'], logo: json['logo']);
   }
 
   String title;
   String level;
+  String logo;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['title'] = title;
     map['level'] = level;
+    map['logo'] = logo;
     return map;
   }
 }

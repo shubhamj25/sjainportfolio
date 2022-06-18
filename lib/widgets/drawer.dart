@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myportfolio/bloc/user_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:transparent_image/transparent_image.dart';
 import '../projects.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -45,8 +46,7 @@ class _MyDrawerState extends State<MyDrawer> {
             body: SingleChildScrollView(
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                    minHeight: MediaQuery.of(context).size.height
-                ),
+                    minHeight: MediaQuery.of(context).size.height),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -57,25 +57,36 @@ class _MyDrawerState extends State<MyDrawer> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16.0, vertical: 24),
                           child: CircleAvatar(
-                            backgroundImage:
-                                CachedNetworkImageProvider(_userBloc.state.user.avatarUrl),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(60),
+                              child: FadeInImage.memoryNetwork(
+                                  placeholder: kTransparentImage,
+                                  image: _userBloc.state.user.avatarUrl,
+                                  height: 120,
+                                  width: 120,
+                                  fit: BoxFit.cover),
+                            ),
                             radius: 60.0,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:24.0),
+                          padding: const EdgeInsets.only(left: 24.0),
                           child: Text(
                             "Shubham Jain",
-                            style: TextStyle(fontSize: 20.0),
+                            style: TextStyle(
+                                fontSize: 20.0, fontWeight: FontWeight.w800),
                           ),
                         ),
                         ListTile(
-                          leading: Image(image:CachedNetworkImageProvider(_userBloc.state.user.currentCompanyLogo)),
+                          leading: FadeInImage.memoryNetwork(
+                              placeholder: kTransparentImage,
+                              image: _userBloc.state.user.currentCompanyLogo),
                           subtitle: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: Text(
                               _userBloc.state.user.drawerDesc,
-                              style: TextStyle(fontSize: 18.0),
+                              style: TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.w600),
                             ),
                           ),
                         ),
@@ -87,7 +98,7 @@ class _MyDrawerState extends State<MyDrawer> {
                               "Work Samples",
                               style: TextStyle(
                                   fontSize: 18.0,
-                                  fontWeight: FontWeight.w100,
+                                  fontWeight: FontWeight.w600,
                                   color: Color.fromARGB(255, 50, 50, 60)),
                             ),
                             onTap: () {
@@ -138,7 +149,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                     "Please provide your name and email to ensure better engagement.",
                                     style: TextStyle(
                                         fontSize: 16.0,
-                                        fontWeight: FontWeight.w100,
+                                        fontWeight: FontWeight.w500,
                                         color: Colors.white),
                                   ),
                                 ],
@@ -203,22 +214,26 @@ class _MyDrawerState extends State<MyDrawer> {
                                     child: Stack(
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(right: 24.0),
+                                          padding: const EdgeInsets.only(
+                                              right: 24.0),
                                           child: TextFormField(
                                             focusNode: _focusNode,
                                             controller: _emailController,
                                             enableInteractiveSelection: true,
                                             style: TextStyle(
-                                                color: Colors.black, fontSize: 16.0),
+                                                color: Colors.black,
+                                                fontSize: 16.0),
                                             onChanged: (value) {
                                               setState(() {
                                                 _emailError = false;
                                               });
                                             },
                                             validator: (String value) {
-                                              if (value == null || value == "") {
+                                              if (value == null ||
+                                                  value == "") {
                                                 return "Please enter an email";
-                                              } else if (!regex.hasMatch(value) ||
+                                              } else if (!regex
+                                                      .hasMatch(value) ||
                                                   _emailError) {
                                                 return "Invalid email";
                                               }
@@ -236,11 +251,15 @@ class _MyDrawerState extends State<MyDrawer> {
                                                   fontSize: 16.0),
                                               fillColor: Colors.white,
                                               contentPadding: EdgeInsets.only(
-                                                  top: 14.0, left: 24, bottom: 14),
-                                              prefixIcon: Icon(Icons.alternate_email,
+                                                  top: 14.0,
+                                                  left: 24,
+                                                  bottom: 14),
+                                              prefixIcon: Icon(
+                                                  Icons.alternate_email,
                                                   color: Colors.black54),
-                                              errorStyle: GoogleFonts.balooBhaina(
-                                                  fontSize: 14),
+                                              errorStyle:
+                                                  GoogleFonts.balooBhaina(
+                                                      fontSize: 14),
                                               border: InputBorder.none,
                                             ),
                                           ),
@@ -249,57 +268,54 @@ class _MyDrawerState extends State<MyDrawer> {
                                           top: 4,
                                           right: 0,
                                           child: _isVerifyingEmail
-                                            ? Transform.scale(
-                                          scale: 0.5,
-                                          child:
-                                          Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: CircularProgressIndicator(
-                                              strokeWidth: 8,
-                                            ),
-                                          ),
+                                              ? Transform.scale(
+                                                  scale: 0.5,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            4.0),
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      strokeWidth: 8,
+                                                    ),
+                                                  ),
+                                                )
+                                              : IconButton(
+                                                  icon: Icon(
+                                                    Icons.download,
+                                                    size: 24,
+                                                    color: Colors.blue,
+                                                  ),
+                                                  onPressed: () async {
+                                                    setState(() {
+                                                      _isVerifyingEmail = true;
+                                                    });
+                                                    _formKey.currentState
+                                                        .save();
+                                                    await verifyEmail(_email)
+                                                        .then((res) {
+                                                      setState(() {
+                                                        _emailError =
+                                                            !res ? true : false;
+                                                        _isVerifyingEmail =
+                                                            false;
+                                                      });
+                                                    });
+                                                    if (_formKey.currentState
+                                                        .validate()) {
+                                                      _userBloc
+                                                        ..add(LogEngagingUser(
+                                                            name: _name,
+                                                            email: _email));
+                                                      html.window.open(
+                                                          _userBloc.state.user
+                                                              .resumeLink,
+                                                          '_self');
+                                                      Navigator.pop(context);
+                                                    }
+                                                  },
+                                                ),
                                         )
-                                            : IconButton(
-                                          icon: Icon(
-                                            Icons.download,
-                                            size:24,
-                                            color: Colors.blue,
-                                          ),
-                                          onPressed: () async {
-                                            setState(() {
-                                              _isVerifyingEmail = true;
-                                            });
-                                            _formKey.currentState.save();
-                                            await verifyEmail(_email)
-                                                .then((res) {
-                                              setState(() {
-                                                _emailError =
-                                                !res ? true : false;
-                                                _isVerifyingEmail = false;
-                                              });
-                                            });
-                                            if (_formKey.currentState
-                                                .validate()) {
-                                              _userBloc
-                                                ..add(LogEngagingUser(
-                                                    name: _name,
-                                                    email: _email));
-                                              _emailController.clear();
-                                              _nameController.clear();
-                                              if(MediaQuery.of(context).size.width<750){
-                                                downloadFile(
-                                                    _userBloc.state.user
-                                                        .resumeLink);
-                                              }
-                                              else{
-                                                html.window.open(_userBloc.state.user
-                                                    .resumeLink,'_blank');
-                                              }
-                                              Navigator.pop(context);
-                                            }
-                                          },
-                                        ),)
-
                                       ],
                                     ),
                                   ),
@@ -340,7 +356,7 @@ Future<bool> verifyEmail(String email) async {
 }
 
 void downloadFile(String url) {
-  html.AnchorElement anchorElement =  new html.AnchorElement(href: url);
+  html.AnchorElement anchorElement = new html.AnchorElement(href: url);
   anchorElement.download = url;
   anchorElement.click();
 }
