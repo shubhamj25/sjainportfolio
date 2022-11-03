@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:myportfolio/models/user.dart';
-import 'package:myportfolio/repositories/user_repo.dart';
+
+import '../models/user.dart';
+import '../repositories/user_repo.dart';
 
 part 'user_event.dart';
+
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {

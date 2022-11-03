@@ -6,16 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:myportfolio/models/certification.dart';
-import 'package:myportfolio/models/user.dart';
-import 'package:myportfolio/my_flutter_app_icons.dart';
-import 'package:myportfolio/repositories/user_repo.dart';
-import 'package:myportfolio/widgets/drawer.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'bloc/user_bloc.dart';
+import 'models/certification.dart';
+import 'models/user.dart';
+import 'my_flutter_app_icons.dart';
+import 'repositories/user_repo.dart';
+import 'widgets/drawer.dart';
 
 Future<void> main() async {
   ErrorWidget.builder = (FlutterErrorDetails details) => Container();
@@ -793,6 +793,7 @@ class _SkillCardState extends State<SkillCard> {
 
 class Skill extends StatefulWidget {
   final String name, level, logo;
+
   Skill(this.name, this.level, this.logo);
 
   @override

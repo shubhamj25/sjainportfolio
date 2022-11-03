@@ -1,5 +1,5 @@
-import 'package:myportfolio/models/certification.dart';
-import 'package:myportfolio/models/project.dart';
+import 'certification.dart';
+import 'project.dart';
 
 class User {
   User(

@@ -2,15 +2,13 @@ import 'dart:convert';
 import 'dart:html' as html;
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:myportfolio/bloc/user_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+import '../bloc/user_bloc.dart';
 import '../projects.dart';
 
 class MyDrawer extends StatefulWidget {

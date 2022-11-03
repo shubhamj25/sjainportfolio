@@ -1,13 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myportfolio/bloc/user_bloc.dart';
-import 'package:myportfolio/code_icons.dart';
-import 'package:myportfolio/constants/constants.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'bloc/user_bloc.dart';
+import 'code_icons.dart';
+import 'constants/constants.dart';
 import 'models/project.dart';
 import 'models/user.dart';
 
