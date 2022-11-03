@@ -27,7 +27,6 @@ class _ProjectsState extends State<Projects> {
   void initState() {
     _userBloc = context.read<UserBloc>();
     super.initState();
-
   }
 
   @override

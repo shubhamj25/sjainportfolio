@@ -1,15 +1,16 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:html' as html;
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myportfolio/bloc/user_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:myportfolio/bloc/user_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
+
 import '../projects.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -32,6 +33,7 @@ class _MyDrawerState extends State<MyDrawer> {
   Pattern pattern =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regex;
+
   @override
   void initState() {
     _userBloc = context.read<UserBloc>();
@@ -292,15 +294,6 @@ class _MyDrawerState extends State<MyDrawer> {
                                                     });
                                                     _formKey.currentState
                                                         .save();
-                                                    await verifyEmail(_email)
-                                                        .then((res) {
-                                                      setState(() {
-                                                        _emailError =
-                                                            !res ? true : false;
-                                                        _isVerifyingEmail =
-                                                            false;
-                                                      });
-                                                    });
                                                     if (_formKey.currentState
                                                         .validate()) {
                                                       _userBloc
