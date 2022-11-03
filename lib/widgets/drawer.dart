@@ -1,11 +1,8 @@
-import 'dart:convert';
 import 'dart:html' as html;
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 import 'package:transparent_image/transparent_image.dart';
 
 import '../bloc/user_bloc.dart';
@@ -326,25 +323,25 @@ class _MyDrawerState extends State<MyDrawer> {
   }
 }
 
-Future<bool> verifyEmail(String email) async {
-  if (email == '') return false;
-  String apiKey =
-      "8d8becf9938726356f5f42d57fd96f9e9b014f8fd754c7b1b62d4c4a0814";
-  Uri _url = Uri.https("learning2092.herokuapp.com", "/verifyEmail");
-  Map<String, String> requestBody = {'email': email, 'apiKey': apiKey};
-  final jsonString = json.encode(requestBody);
-  final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-  http.Response response =
-      await http.post(_url, headers: headers, body: jsonString);
-  if (response.statusCode == 200) {
-    var res = jsonDecode(response.body);
-    if (res['result'] == "valid")
-      return true;
-    else
-      return false;
-  }
-  return false;
-}
+// Future<bool> verifyEmail(String email) async {
+//   if (email == '') return false;
+//   String apiKey =
+//       "8d8becf9938726356f5f42d57fd96f9e9b014f8fd754c7b1b62d4c4a0814";
+//   Uri _url = Uri.https("learning2092.herokuapp.com", "/verifyEmail");
+//   Map<String, String> requestBody = {'email': email, 'apiKey': apiKey};
+//   final jsonString = json.encode(requestBody);
+//   final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+//   http.Response response =
+//       await http.post(_url, headers: headers, body: jsonString);
+//   if (response.statusCode == 200) {
+//     var res = jsonDecode(response.body);
+//     if (res['result'] == "valid")
+//       return true;
+//     else
+//       return false;
+//   }
+//   return false;
+// }
 
 void downloadFile(String url) {
   html.AnchorElement anchorElement = new html.AnchorElement(href: url);
