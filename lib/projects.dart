@@ -46,7 +46,8 @@ class _ProjectsState extends State<Projects> {
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                      image: CachedNetworkImageProvider(_userBloc.state.user.projectCoverUrl),
+                      image: CachedNetworkImageProvider(
+                          _userBloc.state.user.projectCoverUrl),
                       fit: BoxFit.cover,
                     )),
                   ),

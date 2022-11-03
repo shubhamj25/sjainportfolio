@@ -24,8 +24,7 @@ class User {
       this.currentCompanyLogo,
       this.fbUrl,
       this.resumeLink,
-      this.certifications
-      });
+      this.certifications});
 
   factory User.fromJson(Map<String, dynamic> json) {
     List<Skills> skillSet = [];
@@ -60,29 +59,28 @@ class User {
       });
     }
     User user = User(
-      name: json['name'],
-      avatarUrl: json['avatar_url'],
-      drawerDesc: json['drawer_desc'],
-      bio: json['bio'],
-      email: json['email'],
-      mapLink: json['map_link'],
-      mobile: json['mobile'],
-      address: json['address'],
-      gitUsername: json['git_username'],
-      fbUrl: json['fb_url'],
-      linkedInUrl: json['linkedin_url'],
-      coverUrl: json['cover_url'],
-      projectCoverUrl: json['project_cover_url'],
-      skills: skillSet,
-      schooling: json['schooling'],
-      highSchool: json['highSchool'],
-      resumeLink: json['resume_link'],
-      currentCompanyLogo: json['current_company_logo'],
-      college: collegeStats,
-      career: careerStats,
-      projects: projects,
-      certifications: certificates
-    );
+        name: json['name'],
+        avatarUrl: json['avatar_url'],
+        drawerDesc: json['drawer_desc'],
+        bio: json['bio'],
+        email: json['email'],
+        mapLink: json['map_link'],
+        mobile: json['mobile'],
+        address: json['address'],
+        gitUsername: json['git_username'],
+        fbUrl: json['fb_url'],
+        linkedInUrl: json['linkedin_url'],
+        coverUrl: json['cover_url'],
+        projectCoverUrl: json['project_cover_url'],
+        skills: skillSet,
+        schooling: json['schooling'],
+        highSchool: json['highSchool'],
+        resumeLink: json['resume_link'],
+        currentCompanyLogo: json['current_company_logo'],
+        college: collegeStats,
+        career: careerStats,
+        projects: projects,
+        certifications: certificates);
     return user;
   }
 

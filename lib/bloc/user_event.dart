@@ -4,7 +4,7 @@ abstract class UserEvent extends Equatable {
   const UserEvent();
 }
 
-class FetchProfile extends UserEvent{
+class FetchProfile extends UserEvent {
   final String userId;
   const FetchProfile({this.userId});
   @override
@@ -12,13 +12,10 @@ class FetchProfile extends UserEvent{
   List<Object> get props => [userId];
 }
 
-class LogEngagingUser extends UserEvent{
-  final String name,email;
-  const LogEngagingUser({this.name,this.email});
+class LogEngagingUser extends UserEvent {
+  final String name, email;
+  const LogEngagingUser({this.name, this.email});
   @override
   // TODO: implement props
   List<Object> get props => [email];
 }
-
-
-

@@ -468,7 +468,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Container(
                     alignment: Alignment.center,
                     width: _containerWidth,
-                    padding: const EdgeInsets.only(top:8),
+                    padding: const EdgeInsets.only(top: 8),
                     child: ResponsiveGridList(
                         scroll: false,
                         desiredItemWidth:
