@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,11 +46,26 @@ class _ProjectsState extends State<Projects> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                      image: CachedNetworkImageProvider(
-                          _userBloc.state.user.projectCoverUrl),
-                      fit: BoxFit.cover,
-                    )),
+                      image: DecorationImage(
+                        image: CachedNetworkImageProvider(
+                            _userBloc.state.user.projectCoverUrl),
+                        fit: BoxFit.cover,
+                        colorFilter:
+                            ColorFilter.mode(Colors.black38, BlendMode.darken),
+                      ),
+                    ),
+                  ),
+                  ClipRRect(
+                    // Clip it cleanly.
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                      child: Container(
+                        color: Colors.black.withOpacity(0.1),
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        alignment: Alignment.center,
+                      ),
+                    ),
                   ),
                   SingleChildScrollView(
                     child: Column(
@@ -104,7 +121,7 @@ class _ProjectsState extends State<Projects> {
                                     .map((project) => ProjectCard(
                                           project: project,
                                         ))
-                                    .toList(),
+                                    .toList().reversed.toList(),
                               )
                             ],
                           ),

@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -506,10 +507,23 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                      image: CachedNetworkImageProvider(
-                          _userbloc.state.user.coverUrl),
-                      fit: BoxFit.cover,
-                    )),
+                            image: CachedNetworkImageProvider(
+                                _userbloc.state.user.coverUrl),
+                            fit: BoxFit.cover,
+                            colorFilter: ColorFilter.mode(
+                                Colors.black38, BlendMode.darken))),
+                  ),
+                  ClipRRect(
+                    // Clip it cleanly.
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                      child: Container(
+                        color: Colors.black.withOpacity(0.1),
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        alignment: Alignment.center,
+                      ),
+                    ),
                   ),
                   SingleChildScrollView(
                     child: Column(
