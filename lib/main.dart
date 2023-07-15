@@ -471,6 +471,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.only(top: 8),
                     child: ResponsiveGridList(
                         scroll: false,
+                        shrinkWrap: true,
                         desiredItemWidth:
                             min(450, MediaQuery.of(context).size.width - 64),
                         minSpacing: 10,
@@ -518,7 +519,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Container(
-                              height: 500.0,
+                              height: 600.0,
                               child: Swiper(
                                 itemCount: 3,
                                 itemBuilder: (context, index) {
@@ -550,7 +551,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 viewportFraction: 0.85,
                                 scale: 0.85,
                                 autoplay: true,
-                                autoplayDelay: 5000,
+                                autoplayDelay: 10000,
                                 curve: Curves.easeIn,
                                 autoplayDisableOnInteraction: true,
                                 fade: 0.8,
@@ -590,7 +591,7 @@ class _PhotoCardState extends State<PhotoCard> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height: 380,
+      height: 480,
       child: Material(
         elevation: 20.0,
         shape: RoundedRectangleBorder(
@@ -599,7 +600,7 @@ class _PhotoCardState extends State<PhotoCard> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            height: 400,
+            height: 480,
             width: MediaQuery.of(context).size.width * 0.85,
             child: SingleChildScrollView(
               child: ConstrainedBox(
@@ -712,6 +713,46 @@ class _PhotoCardState extends State<PhotoCard> {
                                 ),
                                 Expanded(
                                     child: Text(widget.user.address,
+                                        style: TextStyle(
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w600))),
+                              ],
+                            ),
+                          ),
+                          InkWell(
+                            hoverColor: Colors.transparent,
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, right: 8.0, bottom: 8.0),
+                                  child: Icon(
+                                    Icons.date_range,
+                                    color: Colors.blueAccent,
+                                  ),
+                                ),
+                                Expanded(
+                                    child: Text(widget.user.dob,
+                                        style: TextStyle(
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w600))),
+                              ],
+                            ),
+                          ),
+                          InkWell(
+                            hoverColor: Colors.transparent,
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, right: 8.0, bottom: 8.0),
+                                  child: Icon(
+                                    Icons.card_travel_rounded,
+                                    color: Colors.blueAccent,
+                                  ),
+                                ),
+                                Expanded(
+                                    child: Text("Passport available",
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.w600))),

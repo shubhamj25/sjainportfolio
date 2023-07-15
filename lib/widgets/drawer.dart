@@ -196,7 +196,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                             top: 14.0, left: 24, bottom: 14),
                                         prefixIcon: Icon(Icons.account_circle,
                                             color: Colors.black54),
-                                        errorStyle: GoogleFonts.balooBhaina(
+                                        errorStyle: GoogleFonts.baloo2(
                                             fontSize: 14),
                                         border: InputBorder.none,
                                       ),
@@ -255,7 +255,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                                   Icons.alternate_email,
                                                   color: Colors.black54),
                                               errorStyle:
-                                                  GoogleFonts.balooBhaina(
+                                                  GoogleFonts.baloo2(
                                                       fontSize: 14),
                                               border: InputBorder.none,
                                             ),

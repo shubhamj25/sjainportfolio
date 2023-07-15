@@ -14,6 +14,7 @@ class User {
       this.mobile,
       this.address,
       this.gitUsername,
+      this.dob,
       this.skills,
       this.schooling,
       this.highSchool,
@@ -67,6 +68,7 @@ class User {
         mapLink: json['map_link'],
         mobile: json['mobile'],
         address: json['address'],
+        dob: json['dob'],
         gitUsername: json['git_username'],
         fbUrl: json['fb_url'],
         linkedInUrl: json['linkedin_url'],
@@ -95,6 +97,7 @@ class User {
   String gitUsername;
   String linkedInUrl;
   String fbUrl;
+  String dob;
   String coverUrl;
   String projectCoverUrl;
   String schooling;
@@ -116,6 +119,7 @@ class User {
     map['email'] = email;
     map['map_link'] = mapLink;
     map['mobile'] = mobile;
+    map['dob'] = dob;
     map['address'] = address;
     map['git_username'] = gitUsername;
     map['cover_url'] = coverUrl;
