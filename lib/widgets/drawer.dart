@@ -33,7 +33,7 @@ class _MyDrawerState extends State<MyDrawer> {
   Widget build(BuildContext context) {
     return _userBloc.state.user != null
         ? Scaffold(
-      backgroundColor: context.theme.drawerTheme.backgroundColor,
+            backgroundColor: context.theme.drawerTheme.backgroundColor,
             body: SingleChildScrollView(
               child: ConstrainedBox(
                 constraints: BoxConstraints(
@@ -65,7 +65,9 @@ class _MyDrawerState extends State<MyDrawer> {
                           child: Text(
                             "Shubham Jain",
                             style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.w800,color: Colors.white),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white),
                           ),
                         ),
                         ListTile(
@@ -77,14 +79,17 @@ class _MyDrawerState extends State<MyDrawer> {
                             child: Text(
                               _userBloc.state.user.drawerDesc,
                               style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.w600,color: Colors.white70),
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white70),
                             ),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 50.0),
                           child: ListTile(
-                            leading: Icon(Icons.library_books,color: Colors.white),
+                            leading:
+                                Icon(Icons.library_books, color: Colors.white),
                             title: Text(
                               "Work Samples",
                               style: TextStyle(
