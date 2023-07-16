@@ -1,0 +1,6 @@
+flutter_native_splash:
+  color:  "#1b1f2a"
+  branding: images/shubham.png
+  branding_mode: center
+  fullscreen: true
+  web: true

@@ -3,10 +3,12 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:myportfolio/colors.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -52,10 +54,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Shubham Jain',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: "HappyMonkey",
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+        theme: new ThemeData(
+            fontFamily: "HappyMonkey",
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            scaffoldBackgroundColor: const Color(0x31394c)),
         home: BlocProvider(
           create: (context) =>
               UserBloc()..add(FetchProfile(userId: "sjain251298@gmail.com")),
@@ -95,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
               child: Text(
             text,
-            style: TextStyle(fontSize: 18.0),
+            style: TextStyle(fontSize: 18.0, color: Colors.white70),
           )),
         ],
       ),
@@ -119,14 +121,17 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Text(
                 _certification.title,
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w800),
+                style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white),
               ),
               Text(
                 _certification.org,
                 style: TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black54),
+                    color: Colors.white70),
               ),
             ],
           ),
@@ -139,11 +144,11 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Text(
                 "Issued on : ${_certification.issuedOn}",
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0, color: Colors.white70),
               ),
               Text(
                 "Credential ID : ${_certification.credential}",
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0, color: Colors.white70),
               ),
               MaterialButton(
                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -185,10 +190,10 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton(
               heroTag: 6,
-              backgroundColor: Colors.white,
+              backgroundColor: context.theme.cardTheme.color,
               child: Icon(
                 Icons.sort,
-                color: Colors.black,
+                color: Colors.white,
               ),
               onPressed: () => _scaffold.currentState.openDrawer(),
             ),
@@ -201,37 +206,37 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: const EdgeInsets.all(8.0),
                   child: FloatingActionButton(
                     heroTag: 3,
-                    backgroundColor: Colors.white,
+                    backgroundColor: context.theme.cardTheme.color,
                     child: Icon(
                       MyFlutterApp.github,
                       color: Colors.indigo,
                     ),
-                    onPressed: () =>
-                        launch("https://github.com/" + user.gitUsername),
+                    onPressed: () => launchUrl(
+                        Uri.parse("https://github.com/" + user.gitUsername)),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FloatingActionButton(
                     heroTag: 4,
-                    backgroundColor: Colors.white,
+                    backgroundColor: context.theme.cardTheme.color,
                     child: Icon(
                       MyFlutterApp.linkedin,
                       color: Colors.blueAccent,
                     ),
-                    onPressed: () => launch(user.linkedInUrl),
+                    onPressed: () => launchUrl(Uri.parse(user.linkedInUrl)),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FloatingActionButton(
                     heroTag: 5,
-                    backgroundColor: Colors.white,
+                    backgroundColor: context.theme.cardTheme.color,
                     child: Icon(
                       MyFlutterApp.facebook,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
-                    onPressed: () => launch(user.fbUrl),
+                    onPressed: () => launchUrl(Uri.parse(user.fbUrl)),
                   ),
                 ),
               ],
@@ -317,6 +322,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Card(
+                color: context.theme.cardTheme.color,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(8.0),
@@ -337,14 +343,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                   children: <Widget>[
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Icon(Icons.location_city),
+                                      child: Icon(Icons.location_city,
+                                          color: Colors.white),
                                     ),
                                     Expanded(
                                         child: Text(
                                       "Schooling (2014-2015)",
                                       style: TextStyle(
                                           fontSize: 18.0,
-                                          fontWeight: FontWeight.w700),
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white),
                                     )),
                                   ],
                                 ),
@@ -355,14 +363,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                   children: <Widget>[
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Icon(Icons.account_balance),
+                                      child: Icon(Icons.account_balance,
+                                          color: Colors.white),
                                     ),
                                     Expanded(
                                         child: Text(
                                       "Higher Secondary (2016-2017)",
                                       style: TextStyle(
                                           fontSize: 18.0,
-                                          fontWeight: FontWeight.w700),
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white),
                                     )),
                                   ],
                                 ),
@@ -373,14 +383,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Icon(Icons.school),
+                                    child:
+                                        Icon(Icons.school, color: Colors.white),
                                   ),
                                   Expanded(
                                       child: Text(
                                     "College (2017-2021)",
                                     style: TextStyle(
                                         fontSize: 18.0,
-                                        fontWeight: FontWeight.w700),
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white),
                                   )),
                                 ],
                               ),
@@ -395,14 +407,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Icon(Icons.timeline),
+                                    child: Icon(Icons.timeline,
+                                        color: Colors.white),
                                   ),
                                   Expanded(
                                       child: Text(
                                     "Career (2021 - present)",
                                     style: TextStyle(
                                         fontSize: 18.0,
-                                        fontWeight: FontWeight.w700),
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white),
                                   )),
                                 ],
                               ),
@@ -461,6 +475,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Card(
+                  color: context.theme.cardTheme.color,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(8.0),
@@ -495,8 +510,16 @@ class _MyHomePageState extends State<MyHomePage> {
         body: BlocBuilder<UserBloc, UserState>(
           builder: (context, state) {
             if (state.status == UserStateStatus.initial) {
-              return Center(
-                child: CircularProgressIndicator(),
+              return Container(
+                color: Color.fromARGB(
+                  255,
+                  27,
+                  31,
+                  42,
+                ),
+                height: double.maxFinite,
+                width: double.maxFinite,
+                child: Center(child: CircularProgressIndicator()),
               );
             } else if (state.status == UserStateStatus.success) {
               return Stack(
@@ -506,6 +529,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
+                        color: Color.fromARGB(
+                          255,
+                          27,
+                          31,
+                          42,
+                        ),
                         image: DecorationImage(
                             image: CachedNetworkImageProvider(
                                 _userbloc.state.user.coverUrl),
@@ -561,7 +590,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                     );
                                   }
                                 },
-                                pagination: SwiperPagination(),
+                                pagination: new SwiperPagination(
+                                  alignment: Alignment.bottomCenter,
+                                  builder: new DotSwiperPaginationBuilder(
+                                      color: Colors.white, activeColor: Colors.blueAccent,activeSize: 12),
+                                ),
+                                control: MediaQuery.of(context).size.width > 750 ? new SwiperControl(
+                                  iconPrevious: Icons.arrow_back_ios_new_rounded,
+                                  iconNext: Icons.arrow_forward_ios_rounded,
+                                  color: Colors.blueAccent,
+                                  padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04)
+                                ) : null,
                                 viewportFraction: 0.85,
                                 scale: 0.85,
                                 autoplay: true,
@@ -608,6 +647,7 @@ class _PhotoCardState extends State<PhotoCard> {
       height: 480,
       child: Material(
         elevation: 20.0,
+        color: context.theme.cardTheme.color,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
@@ -641,7 +681,9 @@ class _PhotoCardState extends State<PhotoCard> {
                     ListTile(
                       title: Text("Shubham Jain",
                           style: TextStyle(
-                              fontSize: 18.0, fontWeight: FontWeight.w800)),
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white)),
                       subtitle: Column(
                         children: <Widget>[
                           InkWell(
@@ -658,10 +700,15 @@ class _PhotoCardState extends State<PhotoCard> {
                                       color: Colors.blueAccent),
                                 ),
                                 Expanded(
-                                    child: Text(widget.user.email,
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.w600))),
+                                  child: Text(
+                                    widget.user.email,
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -684,7 +731,8 @@ class _PhotoCardState extends State<PhotoCard> {
                                     child: Text(widget.user.mobile,
                                         style: TextStyle(
                                             fontSize: 16.0,
-                                            fontWeight: FontWeight.w600))),
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white))),
                               ],
                             ),
                           ),
@@ -707,7 +755,8 @@ class _PhotoCardState extends State<PhotoCard> {
                                   widget.user.gitUsername,
                                   style: TextStyle(
                                       fontSize: 16.0,
-                                      fontWeight: FontWeight.w600),
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white),
                                 )),
                               ],
                             ),
@@ -729,7 +778,8 @@ class _PhotoCardState extends State<PhotoCard> {
                                     child: Text(widget.user.address,
                                         style: TextStyle(
                                             fontSize: 16.0,
-                                            fontWeight: FontWeight.w600))),
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white))),
                               ],
                             ),
                           ),
@@ -749,7 +799,8 @@ class _PhotoCardState extends State<PhotoCard> {
                                     child: Text(widget.user.dob,
                                         style: TextStyle(
                                             fontSize: 16.0,
-                                            fontWeight: FontWeight.w600))),
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white))),
                               ],
                             ),
                           ),
@@ -769,7 +820,8 @@ class _PhotoCardState extends State<PhotoCard> {
                                     child: Text("Passport available",
                                         style: TextStyle(
                                             fontSize: 16.0,
-                                            fontWeight: FontWeight.w600))),
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white))),
                               ],
                             ),
                           ),
@@ -804,6 +856,7 @@ class _SkillCardState extends State<SkillCard> {
       height: 380,
       child: Material(
         elevation: 20.0,
+        color: context.theme.cardTheme.color,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
@@ -815,7 +868,10 @@ class _SkillCardState extends State<SkillCard> {
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
                   "Skills",
-                  style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w800),
+                  style: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white),
                 ),
               ),
               Padding(
@@ -860,18 +916,21 @@ class _SkillState extends State<Skill> {
   Widget build(BuildContext context) {
     return Material(
       elevation: 8.0,
+      color: context.theme.cardTheme.color,
       child: ListTile(
         title: Text(
           "${widget.name}",
           style: TextStyle(
               fontSize: MediaQuery.of(context).size.width < 750 ? 13 : 16,
-              fontWeight: FontWeight.w600),
+              fontWeight: FontWeight.w600,
+              color: Colors.white),
         ),
         subtitle: Text(
           "${widget.level}",
           style: TextStyle(
               fontSize: MediaQuery.of(context).size.width < 750 ? 11 : 13,
-              fontWeight: FontWeight.w400),
+              fontWeight: FontWeight.w400,
+              color: Colors.white70),
         ),
         trailing: FadeInImage.memoryNetwork(
             placeholder: kTransparentImage,
@@ -897,6 +956,7 @@ class _HobbieCardState extends State<HobbieCard> {
       height: 380,
       child: Material(
         elevation: 20.0,
+        color: context.theme.cardTheme.color,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
@@ -909,7 +969,10 @@ class _HobbieCardState extends State<HobbieCard> {
                 padding: const EdgeInsets.only(top: 20.0, left: 20, bottom: 0),
                 child: Text(
                   "Hobbies",
-                  style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w800),
+                  style: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white),
                 ),
               ),
               Padding(
@@ -982,19 +1045,27 @@ class _HobbieState extends State<Hobbie> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(
+        color: context.theme.cardTheme.color,
         child: ListTile(
-          leading: widget.icon,
+          leading: Material(
+              color: Colors.transparent,
+              clipBehavior: Clip.antiAlias,
+              shape: ContinuousRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)),
+              child: widget.icon),
           title: Text(
             "${widget.name}",
             style: TextStyle(
                 fontSize: MediaQuery.of(context).size.width < 750 ? 16 : 18,
-                fontWeight: FontWeight.w600),
+                fontWeight: FontWeight.w600,
+                color: Colors.white),
           ),
           subtitle: Text(
             "${widget.desc}",
             style: TextStyle(
                 fontSize: MediaQuery.of(context).size.width < 750 ? 14 : 16,
-                fontWeight: FontWeight.w500),
+                fontWeight: FontWeight.w500,
+                color: Colors.white70),
           ),
         ),
       ),

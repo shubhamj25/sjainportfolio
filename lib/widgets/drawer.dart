@@ -2,7 +2,7 @@ import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:myportfolio/colors.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../bloc/user_bloc.dart';
@@ -17,14 +17,7 @@ class MyDrawer extends StatefulWidget {
 
 class _MyDrawerState extends State<MyDrawer> {
   UserBloc _userBloc;
-  final _emailController = TextEditingController();
-  final _nameController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
   String _email, _name;
-  bool _emailError = false;
-  bool _isVerifyingEmail = false;
-  FocusNode _focusNodeName = FocusNode();
-  FocusNode _focusNode = FocusNode();
   Pattern pattern =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regex;
@@ -40,6 +33,7 @@ class _MyDrawerState extends State<MyDrawer> {
   Widget build(BuildContext context) {
     return _userBloc.state.user != null
         ? Scaffold(
+      backgroundColor: context.theme.drawerTheme.backgroundColor,
             body: SingleChildScrollView(
               child: ConstrainedBox(
                 constraints: BoxConstraints(
@@ -71,7 +65,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           child: Text(
                             "Shubham Jain",
                             style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.w800),
+                                fontSize: 20.0, fontWeight: FontWeight.w800,color: Colors.white),
                           ),
                         ),
                         ListTile(
@@ -83,20 +77,20 @@ class _MyDrawerState extends State<MyDrawer> {
                             child: Text(
                               _userBloc.state.user.drawerDesc,
                               style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.w600),
+                                  fontSize: 18.0, fontWeight: FontWeight.w600,color: Colors.white70),
                             ),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 50.0),
                           child: ListTile(
-                            leading: Icon(Icons.library_books),
+                            leading: Icon(Icons.library_books,color: Colors.white),
                             title: Text(
                               "Work Samples",
                               style: TextStyle(
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.w600,
-                                  color: Color.fromARGB(255, 50, 50, 60)),
+                                  color: Colors.white),
                             ),
                             onTap: () {
                               Navigator.push(context,
@@ -114,7 +108,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       ],
                     ),
                     Container(
-                      margin: const EdgeInsets.all(4),
+                      margin: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: Colors.blueAccent,
                         borderRadius: BorderRadius.all(Radius.circular(8)),

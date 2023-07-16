@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myportfolio/colors.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -37,7 +38,7 @@ class _ProjectsState extends State<Projects> {
         body: BlocBuilder<UserBloc, UserState>(
           builder: (context, state) {
             if (state.status == UserStateStatus.initial) {
-              return Center(child: CircularProgressIndicator());
+              return SizedBox.shrink();
             } else if (state.status == UserStateStatus.success) {
               return Stack(
                 children: <Widget>[
@@ -98,10 +99,10 @@ class _ProjectsState extends State<Projects> {
                             Padding(
                               padding: const EdgeInsets.all(32.0),
                               child: FloatingActionButton(
-                                backgroundColor: Colors.white,
+                                backgroundColor: context.theme.cardTheme.color,
                                 child: Icon(
                                   Icons.home,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                 ),
                                 onPressed: () => Navigator.pop(context),
                               ),
